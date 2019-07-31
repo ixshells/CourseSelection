@@ -1,4 +1,4 @@
-package com.course.CourseSelection;
+package com.course.courseselection;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
