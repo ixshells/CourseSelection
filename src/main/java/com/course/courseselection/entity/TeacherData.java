@@ -12,4 +12,12 @@ import javax.persistence.Table;
 public class TeacherData extends UserData {
     @Column(name = "teacherId")
     private String teacherId;
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
 }

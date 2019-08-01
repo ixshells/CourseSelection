@@ -1,10 +1,10 @@
 package com.course.courseselection.repository;
 
-import com.course.courseselection.entity.StudentData;
+import com.course.courseselection.entity.TeacherData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StudentRepository extends JpaRepository<StudentData, String> {
-    StudentData findByName(String name);
+public interface TeacherRepository extends JpaRepository<TeacherData, String> {
+    TeacherData findByName(String name);
 }

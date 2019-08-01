@@ -1,5 +1,6 @@
 package com.course.courseselection.controller;
 
+import com.course.courseselection.model.Student;
 import com.course.courseselection.model.StudentRequest;
 import com.course.courseselection.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,13 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping(method = POST)
-    public void addStudent(@RequestBody StudentRequest request) {
-        studentService.add(request);
+    @RequestMapping(value = "/register", method = POST)
+    public void register(@RequestBody StudentRequest request) {
+        studentService.register(request);
+    }
+
+    @RequestMapping(value = "/login", method = POST)
+    public String login(@RequestBody Student student) {
+        return studentService.login(student);
     }
 }
