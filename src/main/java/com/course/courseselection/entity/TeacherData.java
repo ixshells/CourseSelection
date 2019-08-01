@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Student")
+@Table(name = "Teacher")
 @Data
-public class StudentData extends UserData {
-    @Column(name = "studentId")
-    private String studentId;
+public class TeacherData extends UserData {
+    @Column(name = "teacherId")
+    private String teacherId;
 }
