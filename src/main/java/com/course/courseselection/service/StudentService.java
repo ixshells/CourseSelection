@@ -4,5 +4,5 @@ import com.course.courseselection.model.StudentRequest;
 
 
 public interface StudentService {
-    void add(StudentRequest student);
+    void add(StudentRequest request);
 }

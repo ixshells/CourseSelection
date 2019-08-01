@@ -1,6 +1,5 @@
 package com.course.courseselection.controller;
 
-import com.course.courseselection.model.Student;
 import com.course.courseselection.model.StudentRequest;
 import com.course.courseselection.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
