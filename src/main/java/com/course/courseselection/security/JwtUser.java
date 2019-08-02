@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-public class JWTUser implements UserDetails {
+public class JwtUser implements UserDetails {
 
     private final String id;
     private final String username;
@@ -14,7 +14,7 @@ public class JWTUser implements UserDetails {
     private final Collection<? extends GrantedAuthority> authorities;
     private final LocalDateTime lastPasswordRestDate;
 
-    public JWTUser(String id, String username, String password, Collection<? extends GrantedAuthority> authorities,
+    public JwtUser(String id, String username, String password, Collection<? extends GrantedAuthority> authorities,
                    LocalDateTime lastPasswordRestDate) {
         this.id = id;
         this.username = username;

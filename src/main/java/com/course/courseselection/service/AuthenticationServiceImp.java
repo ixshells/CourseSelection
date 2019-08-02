@@ -4,7 +4,7 @@ import com.course.courseselection.entity.StudentData;
 import com.course.courseselection.model.Student;
 import com.course.courseselection.model.StudentRequest;
 import com.course.courseselection.repository.StudentRepository;
-import com.course.courseselection.security.JWTUtils;
+import com.course.courseselection.security.JwtUtils;
 import com.course.courseselection.translator.StudentTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,11 +31,11 @@ public class AuthenticationServiceImp implements AuthenticationService {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private JWTUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
     @Override
     public void register(StudentRequest request) {
-        for(Student student: request.getStudents()) {
+        for (Student student : request.getStudents()) {
             StudentData studentData = studentTranslator.translate(student);
             studentRepository.save(studentData);
         }

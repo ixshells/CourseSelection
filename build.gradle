@@ -4,6 +4,7 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'checkstyle'
 
 group = 'com.course'
 version = '0.0.1-SNAPSHOT'
@@ -13,7 +14,17 @@ repositories {
 	mavenCentral()
 }
 
+checkstyle {
+	toolVersion = '7.8.2'
+}
+
 ext['hibernate.version'] = '5.2.12.Final'
+
+checkstyle {
+	configProperties.projectDir = project.projectDir
+	checkstyleMain.configFile = new File(project.projectDir, '/config/checkstyle/checkstyle-main.xml')
+	checkstyleTest.configFile = new File(project.projectDir, '/config/checkstyle/checkstyle-test.xml')
+}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
@@ -24,4 +35,12 @@ dependencies {
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
 	implementation 'org.projectlombok:lombok:1.18.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+sourceSets {
+	test {
+		java {
+			srcDir 'src/test/java'
+		}
+	}
 }

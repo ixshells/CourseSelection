@@ -1,6 +1,6 @@
 package com.course.courseselection.configuration;
 
-import com.course.courseselection.security.JWTAuthenticationTokenFilter;
+import com.course.courseselection.security.JwtAuthenticationTokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -24,8 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JWTAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
-        return new JWTAuthenticationTokenFilter();
+    public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
+        return new JwtAuthenticationTokenFilter();
     }
 
     @Override
@@ -36,8 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.
-                csrf().disable()
+        httpSecurity
+                .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers(

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class JWTUserDetailsServiceImp implements UserDetailsService {
+public class JwtUserDetailsServiceImp implements UserDetailsService {
 
     @Autowired
     private StudentRepository studentRepository;
@@ -22,6 +22,6 @@ public class JWTUserDetailsServiceImp implements UserDetailsService {
         if (studentData == null) {
             throw new UsernameNotFoundException("student not found");
         }
-        return JWTUserFactory.create(studentData);
+        return JwtUserFactory.create(studentData);
     }
 }

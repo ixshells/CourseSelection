@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JWTUserFactory {
+public class JwtUserFactory {
     public static UserDetails create(UserData userData) {
-        return new JWTUser(userData.getId(), userData.getName(),
+        return new JwtUser(userData.getId(), userData.getName(),
                            userData.getPassword(), mapToGranteAuthority(userData),
                            userData.getPasswordResetTime());
     }
@@ -29,5 +29,5 @@ public class JWTUserFactory {
             grantedAuthoritys.add(new SimpleGrantedAuthority(Role.ROLE_TEACHER.toString()));
         }
         return grantedAuthoritys;
-    };
+    }
 }

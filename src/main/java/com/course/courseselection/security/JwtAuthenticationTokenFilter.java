@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
+public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Value("${jwt.token.header.key}")
     private String tokenHeaderKey;
@@ -26,13 +26,14 @@ public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
     private String tokenHead;
 
     @Autowired
-    private JWTUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         final String authHeader = request.getHeader(tokenHeaderKey);
         if (authHeader != null && authHeader.startsWith(tokenHead)) {
             final String authToken = authHeader.substring(tokenHead.length());

@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class JWTUtils {
+public class JwtUtils {
     @Value("${jwt.expiration}")
     private Long expiration;
 
@@ -22,6 +22,15 @@ public class JWTUtils {
     private String secret;
 
     private Clock clock = DefaultClock.INSTANCE;
+
+    public String generateToken(UserDetails userDetails) {
+        Map<String, Object> claims = new HashMap<String, Object>() {
+            {
+                put("username", userDetails.getUsername());
+            }
+        };
+        return generateToken(claims, userDetails.getUsername());
+    }
 
     private String generateToken(Map<String, Object> claims, String subject) {
 
@@ -56,9 +65,10 @@ public class JWTUtils {
                     .parseClaimsJws(token)
                     .getBody();
     }
+
     public Boolean validateToken(String token, UserDetails userDetails) {
         String username = getUsernameFromToken(token);
-        JWTUser user = (JWTUser) userDetails;
+        JwtUser user = (JwtUser) userDetails;
         return user.getUsername().equals(username)
                 && !isTokenExpired(token)
                 && !isTokenCreatedBeforePasswordReset(token);
@@ -71,12 +81,5 @@ public class JWTUtils {
     private boolean isTokenExpired(String token) {
         Date expiration = getExpirationFromToken(token);
         return expiration.before(clock.now());
-    }
-
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<String, Object>(){{
-            put("username", userDetails.getUsername());
-        }};
-        return generateToken(claims, userDetails.getUsername());
     }
 }
