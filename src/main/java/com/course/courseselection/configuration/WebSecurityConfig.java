@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js"
                 ).permitAll()
-                .antMatchers("/student/**").permitAll()
+                .antMatchers("/authentication/**").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.headers().cacheControl();

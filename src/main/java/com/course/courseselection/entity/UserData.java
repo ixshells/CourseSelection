@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -16,9 +17,11 @@ public class UserData {
     private String id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "password")
+    @NotNull
     private String password;
 
     @Column(name = "passwordResetTime")

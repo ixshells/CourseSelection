@@ -19,10 +19,10 @@ import java.io.IOException;
 @Component
 public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
 
-    @Value("${jwt.header.key}")
+    @Value("${jwt.token.header.key}")
     private String tokenHeaderKey;
 
-    @Value("${jwt.tokenHead}")
+    @Value("${jwt.token.head}")
     private String tokenHead;
 
     @Autowired

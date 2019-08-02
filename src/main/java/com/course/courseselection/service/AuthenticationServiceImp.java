@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentServiceImp implements StudentService {
+public class AuthenticationServiceImp implements AuthenticationService {
 
     @Autowired
     private StudentRepository studentRepository;
