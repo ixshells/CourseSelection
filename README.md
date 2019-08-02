@@ -1,6 +1,6 @@
 # CourseSelection
 
-#### 这是一个针对Java学习小组de一个小练习，可以从以下的技术点出发：
+#### 这是一个针对Java学习小组的一个小练习，可以从以下的技术点出发：
 - 如何通过Spring Boot做一个构建一个Restful api以及单元测试
 - 统一的异常处理
 - 通过Swagger 2构建Restful API
