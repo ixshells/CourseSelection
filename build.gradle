@@ -35,9 +35,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'io.jsonwebtoken:jjwt:0.9.0'
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
 	implementation 'org.projectlombok:lombok:1.18.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testCompile group: 'junit', name: 'junit', version: '4.12'
+	testRuntime 'org.slf4j:slf4j-api:1.7.25'
 //	runtime('org.hsqldb:hsqldb')
 	testRuntime('org.hsqldb:hsqldb:2.4.1')
 }

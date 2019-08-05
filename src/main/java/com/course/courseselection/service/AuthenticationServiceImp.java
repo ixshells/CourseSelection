@@ -1,8 +1,9 @@
 package com.course.courseselection.service;
 
 import com.course.courseselection.entity.StudentData;
-import com.course.courseselection.command.Student;
-import com.course.courseselection.command.StudentCommand;
+import com.course.courseselection.model.Student;
+import com.course.courseselection.model.StudentCommand;
+import com.course.courseselection.model.StudentResponse;
 import com.course.courseselection.repository.StudentRepository;
 import com.course.courseselection.security.JwtUtils;
 import com.course.courseselection.translator.StudentTranslator;
@@ -42,13 +43,14 @@ public class AuthenticationServiceImp implements AuthenticationService {
     }
 
     @Override
-    public String login(Student student) {
+    public StudentResponse login(Student student) {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(student.getName(), student.getPassword());
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(student.getName());
         final String token = jwtUtils.generateToken(userDetails);
-        return token;
+        return studentTranslator.translate(token);
     }
+
 }

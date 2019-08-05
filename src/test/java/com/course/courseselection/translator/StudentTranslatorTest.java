@@ -1,7 +1,7 @@
 package com.course.courseselection.translator;
 
 import com.course.courseselection.entity.StudentData;
-import com.course.courseselection.command.Student;
+import com.course.courseselection.model.Student;
 import org.junit.Assert;
 import org.junit.Test;
 
