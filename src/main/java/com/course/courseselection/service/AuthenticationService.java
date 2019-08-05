@@ -1,11 +1,11 @@
 package com.course.courseselection.service;
 
-import com.course.courseselection.model.Student;
-import com.course.courseselection.model.StudentRequest;
+import com.course.courseselection.command.Student;
+import com.course.courseselection.command.StudentCommand;
 
 
 public interface AuthenticationService {
-    void register(StudentRequest request);
+    void register(StudentCommand command);
 
     String login(Student student);
 }

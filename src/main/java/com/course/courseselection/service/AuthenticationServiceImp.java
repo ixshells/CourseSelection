@@ -1,8 +1,8 @@
 package com.course.courseselection.service;
 
 import com.course.courseselection.entity.StudentData;
-import com.course.courseselection.model.Student;
-import com.course.courseselection.model.StudentRequest;
+import com.course.courseselection.command.Student;
+import com.course.courseselection.command.StudentCommand;
 import com.course.courseselection.repository.StudentRepository;
 import com.course.courseselection.security.JwtUtils;
 import com.course.courseselection.translator.StudentTranslator;
@@ -34,7 +34,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
     private JwtUtils jwtUtils;
 
     @Override
-    public void register(StudentRequest request) {
+    public void register(StudentCommand request) {
         for (Student student : request.getStudents()) {
             StudentData studentData = studentTranslator.translate(student);
             studentRepository.save(studentData);

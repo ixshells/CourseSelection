@@ -1,7 +1,7 @@
 package com.course.courseselection.controller;
 
-import com.course.courseselection.model.Student;
-import com.course.courseselection.model.StudentRequest;
+import com.course.courseselection.command.Student;
+import com.course.courseselection.command.StudentCommand;
 import com.course.courseselection.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +17,7 @@ public class AuthenticationController {
     private AuthenticationService studentService;
 
     @RequestMapping(value = "/register", method = POST)
-    public void register(@RequestBody StudentRequest request) {
+    public void register(@RequestBody StudentCommand request) {
         studentService.register(request);
     }
 

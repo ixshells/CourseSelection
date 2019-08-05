@@ -24,11 +24,7 @@ public class JwtUtils {
     private Clock clock = DefaultClock.INSTANCE;
 
     public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<String, Object>() {
-            {
-                put("username", userDetails.getUsername());
-            }
-        };
+        Map<String, Object> claims = new HashMap<>();
         return generateToken(claims, userDetails.getUsername());
     }
 
@@ -54,12 +50,12 @@ public class JwtUtils {
         return claimsFromToken.getSubject();
     }
 
-    public Date getExpirationFromToken(String token) {
+    private Date getExpirationFromToken(String token) {
         Claims claims = getClaimsFromToken(token);
         return claims.getExpiration();
     }
 
-    public Claims getClaimsFromToken(String token) {
+    private Claims getClaimsFromToken(String token) {
         return Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)

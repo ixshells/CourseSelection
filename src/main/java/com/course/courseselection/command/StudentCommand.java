@@ -1,11 +1,11 @@
-package com.course.courseselection.model;
+package com.course.courseselection.command;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class StudentRequest {
+public class StudentCommand {
     private List<Student> students;
 
     public List<Student> getStudents() {
