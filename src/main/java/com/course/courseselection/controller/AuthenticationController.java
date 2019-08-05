@@ -13,8 +13,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping("/authentication")
 public class AuthenticationController {
-    @Autowired
+
     private AuthenticationService studentService;
+
+    @Autowired
+    public AuthenticationController(AuthenticationService studentService) {
+        this.studentService = studentService;
+    }
 
     @RequestMapping(value = "/register", method = POST)
     public void register(@RequestBody StudentCommand request) {
