@@ -1,9 +1,9 @@
 package com.course.courseselection.service;
 
 import com.course.courseselection.entity.StudentData;
-import com.course.courseselection.model.Student;
-import com.course.courseselection.model.StudentCommand;
-import com.course.courseselection.model.StudentResponse;
+import com.course.courseselection.command.Student;
+import com.course.courseselection.command.StudentCommand;
+import com.course.courseselection.command.StudentResponse;
 import com.course.courseselection.repository.StudentRepository;
 import com.course.courseselection.security.JwtUtils;
 import com.course.courseselection.translator.StudentTranslator;

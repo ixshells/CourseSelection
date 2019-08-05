@@ -1,8 +1,8 @@
 package com.course.courseselection.translator;
 
 import com.course.courseselection.entity.StudentData;
-import com.course.courseselection.model.Student;
-import com.course.courseselection.model.StudentResponse;
+import com.course.courseselection.command.Student;
+import com.course.courseselection.command.StudentResponse;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 

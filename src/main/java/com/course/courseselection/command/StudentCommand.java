@@ -1,4 +1,4 @@
-package com.course.courseselection.model;
+package com.course.courseselection.command;
 
 import lombok.Data;
 

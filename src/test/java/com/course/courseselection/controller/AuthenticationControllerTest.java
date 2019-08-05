@@ -1,7 +1,7 @@
 package com.course.courseselection.controller;
 
-import com.course.courseselection.model.Student;
-import com.course.courseselection.model.StudentCommand;
+import com.course.courseselection.command.Student;
+import com.course.courseselection.command.StudentCommand;
 import com.course.courseselection.service.AuthenticationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
