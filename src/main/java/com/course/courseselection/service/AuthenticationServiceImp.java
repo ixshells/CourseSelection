@@ -1,9 +1,10 @@
 package com.course.courseselection.service;
 
-import com.course.courseselection.entity.StudentData;
 import com.course.courseselection.command.Student;
 import com.course.courseselection.command.StudentCommand;
 import com.course.courseselection.command.StudentResponse;
+import com.course.courseselection.entity.StudentData;
+import com.course.courseselection.exception.UnauthorizedException;
 import com.course.courseselection.repository.StudentRepository;
 import com.course.courseselection.security.JwtUtils;
 import com.course.courseselection.translator.StudentTranslator;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -44,9 +46,13 @@ public class AuthenticationServiceImp implements AuthenticationService {
 
     @Override
     public StudentResponse login(Student student) {
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(student.getName(), student.getPassword());
-        final Authentication authentication = authenticationManager.authenticate(upToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(student.getName(), student.getPassword());
+            final Authentication authentication = authenticationManager.authenticate(upToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (AuthenticationException ex) {
+            throw new UnauthorizedException("user name or password is not correct");
+        }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(student.getName());
         final String token = jwtUtils.generateToken(userDetails);
