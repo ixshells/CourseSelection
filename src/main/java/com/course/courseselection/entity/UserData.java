@@ -14,6 +14,11 @@ import java.time.LocalDateTime;
 @Data
 @MappedSuperclass
 public class UserData {
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(name = "id", nullable = false, unique = true)
+    @Size(max = 36)
     private String id;
 
     @Column(name = "name")
@@ -27,11 +32,6 @@ public class UserData {
     @Column(name = "passwordResetTime")
     private LocalDateTime passwordResetTime;
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(name = "id", nullable = false, unique = true)
-    @Size(max = 36)
     public String getId() {
         return id;
     }

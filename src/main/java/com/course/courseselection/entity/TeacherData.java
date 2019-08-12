@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Table(name = "Teacher")
 @Data
 public class TeacherData extends UserData {
+
     @Column(name = "teacherId")
     private String teacherId;
 
