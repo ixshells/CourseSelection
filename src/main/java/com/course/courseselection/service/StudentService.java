@@ -1,0 +1,1 @@
+package com.course.courseselection.service;import com.course.courseselection.command.StudentListResponse;import org.springframework.data.domain.Pageable;public interface StudentService {    StudentListResponse query(Pageable page);    void remove(String studentId);}

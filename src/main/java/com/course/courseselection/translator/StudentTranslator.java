@@ -17,6 +17,7 @@ public class StudentTranslator {
         studentData.setName(student.getName());
         studentData.setPassword(encoder.encode(student.getPassword()));
         studentData.setPasswordResetTime(now);
+        studentData.setCreatedTime(now);
         return studentData;
     }
 

@@ -29,6 +29,9 @@ public class UserData {
     @NotNull
     private String password;
 
+    @Column(name = "createdTime")
+    private LocalDateTime createdTime;
+
     @Column(name = "passwordResetTime")
     private LocalDateTime passwordResetTime;
 
@@ -54,6 +57,14 @@ public class UserData {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
     }
 
     public LocalDateTime getPasswordResetTime() {

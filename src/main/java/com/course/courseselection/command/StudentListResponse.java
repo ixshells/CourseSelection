@@ -1,0 +1,1 @@
+package com.course.courseselection.command;import java.util.List;public class StudentListResponse {    private List<StudentInfoResponse> students;    public List<StudentInfoResponse> getStudents() {        return students;    }    public void setStudents(List<StudentInfoResponse> students) {        this.students = students;    }}

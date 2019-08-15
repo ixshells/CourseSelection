@@ -26,6 +26,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ApiErrors>(apiErrors, ex.getStatus());
     }
 
+//    public ResponseEntity<ApiErrors> handleException(ExpiredJwtException ex) {
+//        ArrayList<ApiError> errors = new ArrayList<ApiError>();
+//        errors.add(new ApiError(http));
+//        ApiErrors apiErrors = new ApiErrors(errors);
+//        return new ResponseEntity<ApiErrors>();
+//    }
+
     private ApiError newApiError(ApplicationException ex) {
         return newApiError(ex.getStatus(), ex.getStatus().getReasonPhrase(), ex.getMessage());
     }
