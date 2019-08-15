@@ -7,6 +7,7 @@ import com.course.courseselection.entity.StudentData;
 import com.course.courseselection.exception.UnauthorizedException;
 import com.course.courseselection.repository.StudentRepository;
 import com.course.courseselection.security.JwtUtils;
+import com.course.courseselection.security.StudentUserDetailsServiceImp;
 import com.course.courseselection.translator.StudentTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,7 +32,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private StudentUserDetailsServiceImp userDetailsService;
 
     @Autowired
     private JwtUtils jwtUtils;

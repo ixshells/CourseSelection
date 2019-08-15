@@ -5,6 +5,7 @@ import com.course.courseselection.exception.BadRequestException;
 import com.course.courseselection.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -24,6 +25,13 @@ public class GlobalExceptionHandler {
         errors.add(newApiError(ex));
         ApiErrors apiErrors = new ApiErrors(errors);
         return new ResponseEntity<ApiErrors>(apiErrors, ex.getStatus());
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ApiErrors> handleException(UsernameNotFoundException ex) {
+        ArrayList<ApiError> errors = new ArrayList<ApiError>();
+        ApiErrors apiErrors = new ApiErrors(errors);
+        return new ResponseEntity<ApiErrors>(apiErrors, HttpStatus.UNAUTHORIZED);
     }
 
 //    public ResponseEntity<ApiErrors> handleException(ExpiredJwtException ex) {
