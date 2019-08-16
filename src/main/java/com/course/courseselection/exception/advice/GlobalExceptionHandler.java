@@ -3,6 +3,7 @@ package com.course.courseselection.exception.advice;
 import com.course.courseselection.exception.ApplicationException;
 import com.course.courseselection.exception.BadRequestException;
 import com.course.courseselection.exception.UnauthorizedException;
+import com.course.courseselection.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,7 +34,14 @@ public class GlobalExceptionHandler {
         ApiErrors apiErrors = new ApiErrors(errors);
         return new ResponseEntity<ApiErrors>(apiErrors, HttpStatus.UNAUTHORIZED);
     }
-    
+
+    public ResponseEntity<ApiErrors> handleException(UserNotFoundException ex) {
+        ArrayList<ApiError> errors = new ArrayList<ApiError>();
+        errors.add(newApiError(ex));
+        ApiErrors apiErrors = new ApiErrors(errors);
+        return new ResponseEntity<ApiErrors>(apiErrors, HttpStatus.NOT_FOUND);
+    }
+
 
     private ApiError newApiError(ApplicationException ex) {
         return newApiError(ex.getStatus(), ex.getStatus().getReasonPhrase(), ex.getMessage());

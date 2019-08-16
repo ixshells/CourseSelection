@@ -1,0 +1,1 @@
+package com.course.courseselection.service;import com.course.courseselection.command.StudentCommand;public interface AdminService {    void add(StudentCommand command);    void delete(StudentCommand command);}
