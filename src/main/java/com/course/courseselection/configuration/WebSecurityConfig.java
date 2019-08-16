@@ -62,6 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity httpSecurity) throws Exception {
             httpSecurity
+                    .antMatcher("/student/**")
                     .csrf().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
@@ -82,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .successHandler(this.studentAuthenticationSuccessHandler)
                     .failureHandler(this.studentAuthenticationFailureHandler);
             httpSecurity.headers().cacheControl();
-            httpSecurity.addFilterBefore(jwtTeacherAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+            httpSecurity.addFilterBefore(jwtStudentAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         }
     }
 
@@ -102,6 +103,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity httpSecurity) throws Exception {
             httpSecurity
+                    .antMatcher("/teacher/**")
                     .csrf().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
