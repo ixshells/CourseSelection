@@ -55,7 +55,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
             throw new UnauthorizedException("user name or password is not correct");
         }
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(student.getName());
+        final UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         final String token = jwtUtils.generateToken(userDetails);
         return studentTranslator.translate(token);
     }

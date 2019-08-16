@@ -1,7 +1,9 @@
 package com.course.courseselection.configuration;
 
+import com.course.courseselection.authentication.StudentAuthenticationFailureHandler;
+import com.course.courseselection.authentication.StudentAuthenticationSuccessHandler;
 import com.course.courseselection.security.JWTTeacherAuthenticationTokenFilter;
-import com.course.courseselection.security.JwtAuthenticationTokenFilter;
+import com.course.courseselection.security.JwtStudentAuthenticationTokenFilter;
 import com.course.courseselection.security.StudentUserDetailsServiceImp;
 import com.course.courseselection.security.TeacherUserDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,26 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    private CustomAuthenticationProvider customAuthenticationProvider;
 
-    @Autowired
-    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-
-    @Autowired
-    private JWTTeacherAuthenticationTokenFilter jwtTeacherAuthenticationTokenFilter;
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-//    @Bean
-//    public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
-//        return new JwtAuthenticationTokenFilter();
-//    }
-//
-//    @Bean
-//    public JWTTeacherAuthenticationTokenFilter teacherAuthenticationTokenFilter() throws Exception {
-//        return new JWTTeacherAuthenticationTokenFilter();
-//    }
 
     @Override
     @Bean
@@ -53,35 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(customAuthenticationProvider);
-//    }
-
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                .antMatchers(
-                        HttpMethod.GET,
-                        "/",
-                        "/*.html",
-                        "/favicon.ico",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js"
-                ).permitAll()
-                .antMatchers("/authentication/**").permitAll()
-                .antMatchers("/student/login").permitAll()
-                .antMatchers("/teacher/login").permitAll()
-                .anyRequest().authenticated();
-
-        httpSecurity.headers().cacheControl();
-        httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        httpSecurity.addFilterBefore(jwtTeacherAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-    }
 
     @Configuration
     @Order(0)
@@ -91,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         private StudentUserDetailsServiceImp studentService;
 
         @Autowired
-        private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+        private JwtStudentAuthenticationTokenFilter jwtStudentAuthenticationTokenFilter;
 
         @Autowired
         private JWTTeacherAuthenticationTokenFilter jwtTeacherAuthenticationTokenFilter;
@@ -119,14 +76,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     ).permitAll()
                     .antMatchers("/authentication/**").permitAll()
                     .antMatchers("/student/login").permitAll()
-                    .antMatchers("/teacher/login").permitAll()
                     .anyRequest().authenticated();
 
             httpSecurity.userDetailsService(studentService).formLogin().loginProcessingUrl("/student/login")
                     .successHandler(this.studentAuthenticationSuccessHandler)
                     .failureHandler(this.studentAuthenticationFailureHandler);
             httpSecurity.headers().cacheControl();
-            httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
             httpSecurity.addFilterBefore(jwtTeacherAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         }
     }
@@ -136,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static class TeacherConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
-        private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+        private JwtStudentAuthenticationTokenFilter jwtStudentAuthenticationTokenFilter;
 
         @Autowired
         private JWTTeacherAuthenticationTokenFilter jwtTeacherAuthenticationTokenFilter;
@@ -160,13 +115,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             "/**/*.js"
                     ).permitAll()
                     .antMatchers("/authentication/**").permitAll()
-                    .antMatchers("/student/login").permitAll()
                     .antMatchers("/teacher/login").permitAll()
                     .anyRequest().authenticated();
 
             httpSecurity.userDetailsService(teacherService).formLogin().loginProcessingUrl("/teacher/login");
             httpSecurity.headers().cacheControl();
-            httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
             httpSecurity.addFilterBefore(jwtTeacherAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         }
     }

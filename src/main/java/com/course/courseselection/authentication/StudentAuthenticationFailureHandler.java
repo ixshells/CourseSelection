@@ -1,4 +1,4 @@
-package com.course.courseselection.configuration;
+package com.course.courseselection.authentication;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

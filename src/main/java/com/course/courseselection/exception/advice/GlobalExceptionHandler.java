@@ -33,13 +33,7 @@ public class GlobalExceptionHandler {
         ApiErrors apiErrors = new ApiErrors(errors);
         return new ResponseEntity<ApiErrors>(apiErrors, HttpStatus.UNAUTHORIZED);
     }
-
-//    public ResponseEntity<ApiErrors> handleException(ExpiredJwtException ex) {
-//        ArrayList<ApiError> errors = new ArrayList<ApiError>();
-//        errors.add(new ApiError(http));
-//        ApiErrors apiErrors = new ApiErrors(errors);
-//        return new ResponseEntity<ApiErrors>();
-//    }
+    
 
     private ApiError newApiError(ApplicationException ex) {
         return newApiError(ex.getStatus(), ex.getStatus().getReasonPhrase(), ex.getMessage());
