@@ -1,11 +1,9 @@
 package com.course.courseselection.configuration;
 
-import com.course.courseselection.authentication.StudentAuthenticationFailureHandler;
+import com.course.courseselection.authentication.AdminAuthenticationSuccessHandler;
 import com.course.courseselection.authentication.StudentAuthenticationSuccessHandler;
-import com.course.courseselection.security.JWTTeacherAuthenticationTokenFilter;
-import com.course.courseselection.security.JwtStudentAuthenticationTokenFilter;
-import com.course.courseselection.security.StudentUserDetailsServiceImp;
-import com.course.courseselection.security.TeacherUserDetailsServiceImp;
+import com.course.courseselection.authentication.UserAuthenticationFailureHandler;
+import com.course.courseselection.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,10 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         private JwtStudentAuthenticationTokenFilter jwtStudentAuthenticationTokenFilter;
 
         @Autowired
-        private JWTTeacherAuthenticationTokenFilter jwtTeacherAuthenticationTokenFilter;
-
-        @Autowired
-        private StudentAuthenticationFailureHandler studentAuthenticationFailureHandler;
+        private UserAuthenticationFailureHandler studentAuthenticationFailureHandler;
 
         @Autowired
         private StudentAuthenticationSuccessHandler studentAuthenticationSuccessHandler;
@@ -66,16 +61,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
-                    .antMatchers(
-                            HttpMethod.GET,
-                            "/",
-                            "/*.html",
-                            "/favicon.ico",
-                            "/**/*.html",
-                            "/**/*.css",
-                            "/**/*.js"
-                    ).permitAll()
-                    .antMatchers("/authentication/**").permitAll()
                     .antMatchers("/student/login").permitAll()
                     .anyRequest().authenticated();
 
@@ -107,22 +92,48 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
-                    .antMatchers(
-                            HttpMethod.GET,
-                            "/",
-                            "/*.html",
-                            "/favicon.ico",
-                            "/**/*.html",
-                            "/**/*.css",
-                            "/**/*.js"
-                    ).permitAll()
-                    .antMatchers("/authentication/**").permitAll()
                     .antMatchers("/teacher/login").permitAll()
                     .anyRequest().authenticated();
 
             httpSecurity.userDetailsService(teacherService).formLogin().loginProcessingUrl("/teacher/login");
             httpSecurity.headers().cacheControl();
             httpSecurity.addFilterBefore(jwtTeacherAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        }
+    }
+
+
+    @Configuration
+    @Order(2)
+    public static class AdminConfig extends WebSecurityConfigurerAdapter {
+
+        @Autowired
+        private JwtAdminAuthenticationTokenFilter jwtAdminAuthenticationTokenFilter;
+
+        @Autowired
+        private AdminUserDetailsServiceImp adminService;
+
+        @Autowired
+        private AdminAuthenticationSuccessHandler adminAuthenticationSuccessHandler;
+
+        @Autowired
+        private UserAuthenticationFailureHandler userAuthenticationFailureHandler;
+
+        @Override
+        protected void configure(HttpSecurity httpSecurity) throws Exception {
+            httpSecurity
+//                    .antMatcher("/admin/**")
+                    .csrf().disable()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                    .authorizeRequests()
+                    .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                    .antMatchers("/admin/login").permitAll()
+                    .anyRequest().authenticated();
+
+            httpSecurity.userDetailsService(adminService).formLogin().loginProcessingUrl("/admin/login")
+                    .successHandler(adminAuthenticationSuccessHandler)
+                    .failureHandler(userAuthenticationFailureHandler);
+            httpSecurity.headers().cacheControl();
+            httpSecurity.addFilterBefore(jwtAdminAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         }
     }
 }

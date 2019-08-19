@@ -2,7 +2,8 @@ package com.course.courseselection.service;
 
 import com.course.courseselection.command.Student;
 import com.course.courseselection.command.StudentCommand;
-import com.course.courseselection.command.StudentResponse;
+import com.course.courseselection.command.User;
+import com.course.courseselection.command.UserResponse;
 import com.course.courseselection.entity.StudentData;
 import com.course.courseselection.exception.UnauthorizedException;
 import com.course.courseselection.repository.StudentRepository;
@@ -16,7 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,7 +46,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
     }
 
     @Override
-    public StudentResponse login(Student student) {
+    public UserResponse login(Student student) {
         try {
             UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(student.getName(), student.getPassword());
             final Authentication authentication = authenticationManager.authenticate(upToken);

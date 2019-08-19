@@ -1,6 +1,6 @@
 package com.course.courseselection.authentication;
 
-import com.course.courseselection.command.StudentResponse;
+import com.course.courseselection.command.UserResponse;
 import com.course.courseselection.security.JwtUtils;
 import com.course.courseselection.translator.StudentTranslator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,10 +31,10 @@ public class StudentAuthenticationSuccessHandler implements AuthenticationSucces
             throws IOException, ServletException {
         final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         final String token = jwtUtils.generateToken(userDetails);
-        StudentResponse studentResponse = studentTranslator.translate(token);
+        UserResponse userResponse = studentTranslator.translate(token);
 
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType(JSON_API);
-        response.getWriter().write(objectMapper.writeValueAsString(studentResponse));
+        response.getWriter().write(objectMapper.writeValueAsString(userResponse));
     }
 }

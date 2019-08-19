@@ -1,6 +1,7 @@
 package com.course.courseselection.security;
 
 import com.course.courseselection.constant.Role;
+import com.course.courseselection.entity.Admin;
 import com.course.courseselection.entity.StudentData;
 import com.course.courseselection.entity.TeacherData;
 import com.course.courseselection.entity.UserData;
@@ -27,6 +28,10 @@ public class JwtUserFactory {
 
         if (userData instanceof TeacherData) {
             grantedAuthoritys.add(new SimpleGrantedAuthority(Role.ROLE_TEACHER.toString()));
+        }
+
+        if (userData instanceof Admin) {
+            grantedAuthoritys.add(new SimpleGrantedAuthority(Role.ROLE_ADMIN.toString()));
         }
         return grantedAuthoritys;
     }

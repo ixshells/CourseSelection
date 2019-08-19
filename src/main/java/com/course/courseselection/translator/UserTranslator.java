@@ -1,0 +1,1 @@
+package com.course.courseselection.translator;import com.course.courseselection.command.UserResponse;import org.springframework.stereotype.Component;@Componentpublic class UserTranslator {    public UserResponse translate(String token) {        UserResponse userResponse = new UserResponse();        userResponse.setToken(token);        return userResponse;    }}

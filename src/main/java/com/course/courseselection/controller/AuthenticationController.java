@@ -2,8 +2,8 @@ package com.course.courseselection.controller;
 
 import com.course.courseselection.command.Student;
 import com.course.courseselection.command.StudentCommand;
-import com.course.courseselection.command.StudentResponse;
-import com.course.courseselection.command.TeacherCommand;
+import com.course.courseselection.command.User;
+import com.course.courseselection.command.UserResponse;
 import com.course.courseselection.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +32,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "student/login", method = POST)
-    public StudentResponse login(@RequestBody Student student) {
+    public UserResponse login(@RequestBody Student student) {
         return studentService.login(student);
     }
 

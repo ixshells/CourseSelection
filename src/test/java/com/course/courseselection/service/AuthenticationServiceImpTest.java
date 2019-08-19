@@ -1,9 +1,10 @@
 package com.course.courseselection.service;
 
+import com.course.courseselection.command.UserResponse;
 import com.course.courseselection.entity.StudentData;
 import com.course.courseselection.command.Student;
 import com.course.courseselection.command.StudentCommand;
-import com.course.courseselection.command.StudentResponse;
+import com.course.courseselection.command.User;
 import com.course.courseselection.repository.StudentRepository;
 import com.course.courseselection.security.JwtUtils;
 import com.course.courseselection.translator.StudentTranslator;
@@ -65,7 +66,7 @@ public class AuthenticationServiceImpTest {
         Student student = buildStudent();
         String expectedToken = "token";
         when(jwtUtils.generateToken(any())).thenReturn(expectedToken);
-        StudentResponse response = authenticationService.login(student);
+        UserResponse response = authenticationService.login(student);
         Assert.assertEquals(expectedToken, response.getToken());
     }
 

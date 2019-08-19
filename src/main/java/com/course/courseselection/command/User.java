@@ -3,7 +3,7 @@ package com.course.courseselection.command;
 import lombok.Data;
 
 @Data
-public class StudentResponse {
+public class User {
     private String token;
 
     public String getToken() {
