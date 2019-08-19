@@ -21,7 +21,8 @@ public class JwtStudentAuthenticationTokenFilter extends AuthenticationTokenFilt
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         super.doFilterInternal(request, response, filterChain);
     }
 }

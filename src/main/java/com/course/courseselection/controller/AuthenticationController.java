@@ -2,7 +2,6 @@ package com.course.courseselection.controller;
 
 import com.course.courseselection.command.Student;
 import com.course.courseselection.command.StudentCommand;
-import com.course.courseselection.command.User;
 import com.course.courseselection.command.UserResponse;
 import com.course.courseselection.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;

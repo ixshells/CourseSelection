@@ -14,7 +14,8 @@ import java.io.IOException;
 public class UserAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
+            throws IOException, ServletException {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.getWriter().write("user name or password is not correct");
     }
