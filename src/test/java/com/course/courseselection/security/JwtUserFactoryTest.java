@@ -1,5 +1,7 @@
 package com.course.courseselection.security;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import com.course.courseselection.constant.Role;
 import com.course.courseselection.entity.StudentData;
 import com.course.courseselection.entity.TeacherData;
@@ -7,8 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class JwtUserFactoryTest {
 

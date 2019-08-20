@@ -1,5 +1,4 @@
 package com.course.courseselection.controller;
-
 import java.util.ArrayList;
 
 import com.course.courseselection.command.Student;
@@ -80,7 +79,8 @@ public class AuthenticationControllerTest {
                 .andExpect(status().isOk());
 
         String studentContent = objectMapper.writeValueAsString(student);
-        mockMvc.perform(MockMvcRequestBuilders.post("/authentication/login").contentType(JSON_API).content(studentContent))
+        mockMvc.perform(MockMvcRequestBuilders.post("/authentication/login")
+                .contentType(JSON_API).content(studentContent))
                 .andExpect(status().isOk());
     }
 }
