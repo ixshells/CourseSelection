@@ -133,6 +133,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureHandler(userAuthenticationFailureHandler);
             httpSecurity.headers().cacheControl();
             httpSecurity.addFilterBefore(jwtAdminAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+//            httpSecurity.exceptionHandling().authenticationEntryPoint()
         }
     }
 }
