@@ -1,6 +1,4 @@
 pipeline {
-    agent { node 'CourseSelection' }
-
     triggers {
         pollSCM('H/5 8-23 * * 1-5')
     }
